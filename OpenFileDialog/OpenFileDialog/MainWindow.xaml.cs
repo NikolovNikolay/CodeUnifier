@@ -100,13 +100,16 @@ namespace OpenFileDialog
             {
                 using (StreamWriter writer = new StreamWriter(currentDirectory + OutputFileName + DefaultExtension))
                 {
-                    foreach (var name in namespaces)
+                    if (namespaces.Count > 0)
                     {
-                        writer.WriteLine(name);
+                        foreach (var name in namespaces)
+                        {
+                            writer.WriteLine(name);
+                        }
+                        writer.WriteLine();
                     }
-                    writer.WriteLine();
 
-                    writer.Write(finalResult);
+                    writer.Write(finalResult.ToString().Trim());
                 } 
             }
         }
