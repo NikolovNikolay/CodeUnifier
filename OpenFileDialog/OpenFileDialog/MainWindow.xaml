@@ -1,13 +1,13 @@
 ﻿<Window x:Class="OpenFileDialog.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="CSharp file unifier" Height="150" Width="525">
+        Title="CSharp file unifier" Height="140" Width="525">
     <Canvas Background="LightBlue">
-        <TextBlock Margin="10" FontWeight="Bold">Please choose the files you would like to unify:</TextBlock>
-        <TextBox Height="32" HorizontalAlignment="Left" Margin="6,27,0,0" Name="FileNameTextBox"
+        <TextBlock Margin="10,8,0,0" FontWeight="Bold" Text="Please choose the files you would like to unify:"/>
+        <TextBox Height="25" HorizontalAlignment="Left" Margin="6,27,0,0" Name="FileNameTextBox"
                  VerticalAlignment="Top" Width="393" />
-        <Button Content="Browse" Height="32" HorizontalAlignment="Left" Margin="405,27,0,0"
-                Name="button1" VerticalAlignment="Top" Width="88" Click="FilePicker" />
-        <Button Content="Unify files!" Height="32" Width="88" Canvas.Top="70" Canvas.Left="6" Foreground="Red" Click="UnifyFiles"></Button>
+        <Button Content="Browse..." Height="25" HorizontalAlignment="Left" Margin="405,27,0,0"
+                Name="BrowseButton" VerticalAlignment="Top" Width="88" Click="FilePicker" />
+        <Button Name="UnifierButton" IsEnabled="False" Content="Unify files!" Margin="6,55,0,0" Width="88" Height="25" Foreground="Red" Click="UnifyFiles"/>
     </Canvas>
 </Window>

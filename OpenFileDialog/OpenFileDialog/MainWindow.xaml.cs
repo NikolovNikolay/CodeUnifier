@@ -94,17 +94,20 @@ namespace OpenFileDialog
             }
         }
 
-        private static void WriteToOutputFile(StringBuilder finalResult, List<string> namespaces)
+        private static void WriteToOutputFile(StringBuilder finalResult, List<string> namespaces, TextBox textBox)
         {
-            using (StreamWriter writer = new StreamWriter(currentDirectory + OutputFileName + DefaultExtension))
+            if (textBox.Text.Length > 0)
             {
-                foreach (var name in namespaces)
+                using (StreamWriter writer = new StreamWriter(currentDirectory + OutputFileName + DefaultExtension))
                 {
-                    writer.WriteLine(name);
-                }
-                writer.WriteLine();
+                    foreach (var name in namespaces)
+                    {
+                        writer.WriteLine(name);
+                    }
+                    writer.WriteLine();
 
-                writer.Write(finalResult);
+                    writer.Write(finalResult);
+                } 
             }
         }
 
@@ -124,19 +127,33 @@ namespace OpenFileDialog
             {
                 FileNameTextBox.Text = GetFilesNames();
             }
+
+            if (this.FileNameTextBox.Text.Length > 0)
+            {
+                this.UnifierButton.IsEnabled = true;
+            }
+            
         }
 
         private void UnifyFiles(object sender, RoutedEventArgs e)
         {
             try
-            {
+            {                
                 var finalResult = new StringBuilder();
                 List<string> namespaces = new List<string>();
 
                 ReadAllFiles(finalResult, namespaces);
-                WriteToOutputFile(finalResult, namespaces);
+                WriteToOutputFile(finalResult, namespaces,this.FileNameTextBox);
 
-                MessageBox.Show("Files unified successfully! Please check: " + currentDirectory + OutputFileName + DefaultExtension);
+                if (this.FileNameTextBox.Text.Length > 0)
+                {
+                    MessageBox.Show("Files unified successfully! Please check: " + currentDirectory + OutputFileName + DefaultExtension); 
+                }
+                else
+                {
+                    MessageBox.Show("Select some files first!");
+                    return;
+                }
                 
             }
             catch (Exception)
